@@ -1,0 +1,41 @@
+name: client
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    environment: production
+    steps:
+      - name: Checkout source code.
+        uses: actions/checkout@v3
+      - name: Generate Environment Variables File for Production baseURL
+        run: echo "VITE_BASE_URLL=$VITE_BASE_URL" >> .env.production
+        working-directory: ./
+        env:
+          REACT_APP_BASE_URL: ${{ secrets.VITE_BASE_URL }}
+      - name: Install dependencies
+        run: yarn
+        working-directory: ./
+      - name: Build
+        run: CI=false yarn build
+        working-directory: ./
+      - name: SHOW AWS CLI VERSION
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_CLIENT }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_CLIENT }}
+          AWS_EC2_METADATA_DISABLED: true
+        run: |
+          aws --version
+      - name: Sync Bucket
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_CLIENT }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_CLIENT }}
+          AWS_EC2_METADATA_DISABLED: true
+        run: |
+          aws s3 sync \
+            --region ap-northeast-2 \
+            build s3://plugo-assignment \
+            --delete
+        working-directory: ./
