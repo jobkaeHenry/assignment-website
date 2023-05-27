@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getLS } from "../../utils/localStorage";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const BASE_URL_DEV = import.meta.env.VITE_BASE_URL_DEV;
@@ -16,6 +17,7 @@ if (import.meta.env.NODE_ENV === "development") {
 export const axiosPrivate = axios.create({
   headers: {
     "Content-Type": "application/json",
+    Authorization: `Bearer ${getLS("accessToken")}`,
   },
   withCredentials: true,
 });

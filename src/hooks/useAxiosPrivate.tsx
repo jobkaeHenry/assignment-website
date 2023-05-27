@@ -9,7 +9,6 @@ const useAxiosPrivate = () => {
   useEffect(() => {
     // 요청을 가로채는 인터셉터 (필요할때만 토큰을 싣기 위해)
     const accessToken = getLS("accessToken");
-
     const requestIntercept = axiosPrivate.interceptors.request.use(
       (config) => {
         if (config.headers && !config.headers["Authorization"] && accessToken) {
