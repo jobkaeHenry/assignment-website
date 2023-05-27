@@ -11,7 +11,7 @@ interface Props {
   pageNum?: number;
 }
 
-const ItemsList = ({ pageNum = 0 }: Props) => {
+const ItemsList = ({ pageNum = 1 }: Props) => {
   const { data } = useQuery<ItemType[]>(["items", pageNum], () =>
     axios.get(getItemsByPageNum(pageNum)).then(({ data }) => data)
   );
