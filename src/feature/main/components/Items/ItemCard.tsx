@@ -3,16 +3,16 @@ import Text from "../../../../components/atom/Text";
 import { ItemType } from "../../../items/types/itemDataTypes";
 import styled from "@emotion/styled";
 import { addToCartRoute } from "../../../../data/URL/server/cartRoute";
-import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
+
 import { useState } from "react";
 import { LoadingSpinner } from "../../../../components/atom/lodaing/Spinner";
+import { axiosPrivate } from "../../../../lib/api/axios";
 
 type Props = {
   data: ItemType;
 };
 
 const ItemCard = ({ data }: Props) => {
-  const axiosPrivate = useAxiosPrivate();
   const [isProceeding, setIsProceeding] = useState(false);
 
   const { description, id, image, price, title } = data;

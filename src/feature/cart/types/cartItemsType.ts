@@ -1,6 +1,6 @@
 import { ItemType } from "../../items/types/itemDataTypes";
 
 export interface CartItemType {
-  itemInfo: ItemType;
+  itemInfo: { _id: string } & Omit<ItemType, "id">;
   quantity: number;
 }
