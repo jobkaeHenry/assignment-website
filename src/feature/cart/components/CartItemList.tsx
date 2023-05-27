@@ -4,9 +4,12 @@ import CartItemElem from "./CartItemElem";
 import { NotifyMessage } from "../../../components/atom/lodaing/Error";
 import { CartItemType } from "../types/cartItemsType";
 import { axiosPrivate } from "../../../lib/api/axios";
+import { useRecoilValue } from "recoil";
+import { userInfoAtom } from "../../../context/recoil/atom/user";
 
 const CartItemList = () => {
-  const { data } = useQuery<CartItemType[]>(["Cartitems"], () =>
+  const { userId } = useRecoilValue(userInfoAtom);
+  const { data } = useQuery<CartItemType[]>(["Cartitems", userId], () =>
     axiosPrivate.get(getCartItemById).then(({ data }) => data)
   );
 
