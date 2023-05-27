@@ -5,9 +5,10 @@ import { ItemType } from "../../items/types/itemDataTypes";
 import ItemCard from "./Items/ItemCard";
 import PaddingLayout from "../../../layouts/PaddingLayout";
 import Text from "../../../components/atom/Text";
+import { NotifyMessage } from "../../../components/atom/lodaing/Error";
 
 interface Props {
-  pageNum: number;
+  pageNum?: number;
 }
 
 const ItemsList = ({ pageNum = 0 }: Props) => {
@@ -15,16 +16,16 @@ const ItemsList = ({ pageNum = 0 }: Props) => {
     axios.get(getItemsByPageNum(pageNum)).then(({ data }) => data)
   );
 
-  return data!.length === 0 ? (
-    <>아이템이 없습니다</>
-  ) : (
+  return (
     <PaddingLayout>
       <Text typography="h3" bold>
         최신 아이템
       </Text>
-      {data!.map((e) => (
-        <ItemCard data={e} key={e.id}></ItemCard>
-      ))}
+      {data?.length !== 0 ? (
+        <NotifyMessage message="등록된 아이템이 없습니다" />
+      ) : (
+        data?.map((e) => <ItemCard data={e} key={e.id}></ItemCard>)
+      )}
     </PaddingLayout>
   );
 };
