@@ -17,7 +17,6 @@ if (import.meta.env.NODE_ENV === "development") {
 export const axiosPrivate = axios.create({
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${getLS("accessToken")}`,
   },
   withCredentials: true,
 });

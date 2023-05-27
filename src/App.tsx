@@ -8,6 +8,8 @@ import { LoadingSpinner } from "./components/atom/lodaing/Spinner";
 import { css } from "@emotion/react";
 import useInitialLoginCheck from "./hooks/user/useInitialLoginCheck";
 import MarginTopLayout from "./layouts/router/Layout";
+import ItemDetail from "./pages/Items/ItemDetail";
+import useAxiosPrivate from "./hooks/useAxiosPrivate";
 
 // 페이지 진입시만 불러올 것
 const Missing = lazy(() => import("./pages/Error/MissingPage"));
@@ -17,6 +19,7 @@ const UserPage = lazy(() => import("./pages/user/UserPage"));
 
 function App() {
   useInitialLoginCheck();
+  useAxiosPrivate()
 
   return (
     <BrowserRouter>
@@ -26,6 +29,8 @@ function App() {
         <Routes>
           <Route element={<MarginTopLayout />}>
             <Route path="/" element={<Main />} />
+            {/* 아이템 상세페이지 */}
+            <Route path="/item/:id" element={<ItemDetail />} />
             {/* 유저라우트 */}
             <Route path="user" element={<Outlet />}>
               {/* 유저전용 라우트 */}
