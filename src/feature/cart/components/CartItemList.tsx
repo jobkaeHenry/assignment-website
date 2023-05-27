@@ -6,6 +6,7 @@ import { CartItemType } from "../types/cartItemsType";
 import { axiosPrivate } from "../../../lib/api/axios";
 import { useRecoilValue } from "recoil";
 import { userInfoAtom } from "../../../context/recoil/atom/user";
+import { css } from "@emotion/react";
 
 const CartItemList = () => {
   const { userId } = useRecoilValue(userInfoAtom);
@@ -14,7 +15,7 @@ const CartItemList = () => {
   );
 
   return (
-    <div>
+    <div css={width100}>
       {data!.length !== 0 ? (
         data!.map((cartItem, i) => (
           <CartItemElem data={cartItem} key={cartItem.itemInfo._id + i} />
@@ -27,3 +28,7 @@ const CartItemList = () => {
 };
 
 export default CartItemList;
+
+const width100 = css`
+  width: 100%;
+`

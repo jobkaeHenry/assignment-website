@@ -9,7 +9,13 @@ export const userInfoAtom = atom<{
   userId: string | undefined;
   isSeller: boolean | undefined;
   userName: string | undefined;
+  isSellerNow: boolean;
 }>({
   key: "userInfo",
-  default: { userId: undefined, isSeller: undefined, userName: undefined },
+  default: {
+    isSellerNow: false,
+    userId: undefined,
+    isSeller: undefined,
+    userName: undefined,
+  },
 });
