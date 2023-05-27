@@ -22,7 +22,8 @@ const useInitialLoginCheck = async () => {
 
     if (accessToken && refreshToken) {
       axiosPrivate.get(getUserInfoByUserId).then(({ data }) => {
-        setUserInfo(data);
+        const { userName, userId, isSeller } = data;
+        setUserInfo({ userName, userId, isSeller });
         setIsLogin(true);
       });
     } else {

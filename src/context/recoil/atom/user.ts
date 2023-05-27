@@ -6,9 +6,10 @@ export const LoginStatus = atom<boolean>({
 });
 
 export const userInfoAtom = atom<{
-  userId: undefined | string;
+  userId: string | undefined;
   isSeller: boolean | undefined;
+  userName: string | undefined;
 }>({
   key: "userInfo",
-  default: { userId: undefined, isSeller: undefined },
+  default: { userId: undefined, isSeller: undefined, userName: undefined },
 });

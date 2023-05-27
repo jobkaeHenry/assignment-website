@@ -6,24 +6,23 @@ import { FormValues } from "../types/FormValueType";
 import useSetIsLogin from "../../../hooks/user/useSetIsLogin";
 import { login } from "../../../data/URL/local/user/url";
 import { useSetRecoilState } from "recoil";
-import {userInfoAtom} from '../../../context/recoil/atom/user'
+import { userInfoAtom } from "../../../context/recoil/atom/user";
 /**
  * 로그인 핸들러와 에러메시지를 리턴하는 함수
  */
 export const useLoginHandler = () => {
   const loginHandler = useSetIsLogin();
-  const setUserInfo = useSetRecoilState(userInfoAtom)
+  const setUserInfo = useSetRecoilState(userInfoAtom);
   const from = useLocation().state?.from?.pathname || "/";
   const navigate = useNavigate();
   const [serverSentError, setServerSentError] = useState("");
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    
     axios
       .post(login, data)
-      .then(({data}) => {
-        console.log(data)
-        const { accessToken,refreshToken,isSeller,userId } = data;
-
+      .then(({ data }) => {
+        console.log(data);
+        const { accessToken, refreshToken, isSeller, userId, userName } = data;
+        setUserInfo({ isSeller, userId, userName });
         loginHandler({ accessToken, refreshToken });
         navigate(from);
       })
