@@ -44,8 +44,12 @@ export const Modal = () => {
   ) : null;
 };
 const ModalWrapper = styled.div`
-  width: calc(100% - 48px);
-  height: calc(100% - 48px);
+  width: fit-content;
+  height: fit-content;
+  min-width: 300px;
+  min-height: 300px;
+  max-width: calc(100% - 48px);
+  max-height: calc(100% - 48px);
   position: relative;
   padding: 16px;
   background-color: var(--pure-white);
@@ -53,7 +57,7 @@ const ModalWrapper = styled.div`
 `;
 
 const ModalBackDrop = styled.div`
-  position: fixed;
+  position: absolute;
   width: 100vw;
   height: ${(props: { height?: number; width?: number }) =>
     `${props.height}px`};
@@ -64,4 +68,5 @@ const ModalBackDrop = styled.div`
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 998;
+  top: 0;
 `;
