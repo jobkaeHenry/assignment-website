@@ -5,6 +5,11 @@ import { itemDescription } from "../../../data/URL/local/user/url";
 import { ColumnWrapper, RowWrapper } from "../../../layouts/Wrapper";
 import Text from "../../../components/atom/Text";
 import InputWithLabel from "./../../../components/atom/form/InputWithLabel";
+import { useMutation, useQueryClient } from "react-query";
+import { axiosPrivate } from "../../../lib/api/axios";
+import { deleteCartItem } from "../../../data/URL/server/cartRoute";
+import { userInfoAtom } from "../../../context/recoil/atom/user";
+import { useRecoilValue } from "recoil";
 
 type Props = {
   data: CartItemType;
@@ -12,6 +17,25 @@ type Props = {
 
 const CartItemElem = ({ data }: Props) => {
   const { description, _id, image, price, title } = data.itemInfo;
+  const queryClient = useQueryClient();
+  const { userId } = useRecoilValue(userInfoAtom);
+  const previousData = queryClient.getQueriesData([
+    "Cartitems",
+    userId,
+  ])[0][1] as CartItemType[];
+  const { mutate } = useMutation(
+    (id: string) => axiosPrivate.delete(deleteCartItem(id)),
+    {
+      onMutate: () => {
+        queryClient.setQueryData(["Cartitems", userId], () =>
+          previousData.filter((e) => e.itemInfo._id !== _id)
+        );
+      },
+      onError: () => {
+        queryClient.setQueryData(["Cartitems", userId], () => previousData);
+      },
+    }
+  );
 
   return (
     <CartItemWrapper>
@@ -35,6 +59,7 @@ const CartItemElem = ({ data }: Props) => {
           inputWidth="100"
         />
       </QuantityCouterWrapper>
+      <button onClick={() => mutate(_id)}>삭제</button>
     </CartItemWrapper>
   );
 };
@@ -55,8 +80,8 @@ export const QuantityCouterWrapper = styled.div`
   width: 100px;
 `;
 
-const ImageWrapper = styled.img`
+export const ImageWrapper = styled.img`
   width: 100px;
   height: 100px;
-  background-color: var(--bg-gray)
+  background-color: var(--bg-gray);
 `;
