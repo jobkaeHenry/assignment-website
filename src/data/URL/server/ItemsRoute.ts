@@ -24,6 +24,6 @@ export const getItemsByPageNum = (pageNum: number, quantity = 5) => {
 export const createItemUrl = "/items";
 
 /**
- * [get] 아이템 id로 해당 아이템을 삭제하는 Route
+ * [delete] 아이템 id로 해당 아이템을 삭제하는 Route
  */
 export const deleteItemRoute = (id: string) => `/items/${id}`;

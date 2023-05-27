@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import Text from "../../../../components/atom/Text";
 import { ItemType } from "../../../items/types/itemDataTypes";
 import styled from "@emotion/styled";
@@ -7,6 +7,8 @@ import { addToCartRoute } from "../../../../data/URL/server/cartRoute";
 import { useState } from "react";
 import { LoadingSpinner } from "../../../../components/atom/lodaing/Spinner";
 import { axiosPrivate } from "../../../../lib/api/axios";
+import { userInfoAtom } from "../../../../context/recoil/atom/user";
+import { useRecoilValue } from "recoil";
 
 type Props = {
   data: ItemType;
@@ -14,8 +16,10 @@ type Props = {
 
 const ItemCard = ({ data }: Props) => {
   const [isProceeding, setIsProceeding] = useState(false);
-
+  const { userId } = useRecoilValue(userInfoAtom);
   const { description, id, image, price, title } = data;
+  const queryClient = useQueryClient();
+
   const { mutate } = useMutation(
     (id: string) => axiosPrivate.post(addToCartRoute, { itemId: id }),
     {
@@ -23,11 +27,16 @@ const ItemCard = ({ data }: Props) => {
         setIsProceeding(true);
       },
       onSuccess: () => {
-        // 쿼리 스테일, 토스트 팝업해야함
+        // 토스트 팝업해야함
         setIsProceeding(false);
+        queryClient.invalidateQueries({
+          queryKey: ["Cartitems", userId],
+          refetchInactive: true,
+        });
       },
     }
   );
+
   return (
     <CardWrapper>
       <ImageWrapper>
