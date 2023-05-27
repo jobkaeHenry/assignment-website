@@ -49,8 +49,8 @@ export const HeaderLayout = () => {
     </>
   );
 };
-/** Nested Route 구현을 위해 element에 프롭으로 사용하는 Hoc*/
-const NestedLayout = () => {
+/** 네비게이션 바 높이 만큼 마진을 제공하는 레이아웃ㅅ */
+const MarginTopLayout = () => {
   return (
     <DefaultLayout>
       <Outlet />
@@ -58,4 +58,4 @@ const NestedLayout = () => {
   );
 };
 
-export default NestedLayout;
+export default MarginTopLayout;
