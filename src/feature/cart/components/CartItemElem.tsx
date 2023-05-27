@@ -48,7 +48,7 @@ const CartItemElem = ({ data }: Props) => {
             {`[${title}]`}
           </Text>
           <Text typography="p">{description}</Text>
-          <Text typography="p">{price}</Text>
+          <Text typography="p">{price.toLocaleString()}</Text>
         </ColumnWrapper>
       </RowWrapper>
       <QuantityCouterWrapper>
@@ -58,8 +58,8 @@ const CartItemElem = ({ data }: Props) => {
           defaultValue={data.quantity}
           inputWidth="100"
         />
+        <DeleteButton onClick={() => mutate(_id)}>삭제</DeleteButton>
       </QuantityCouterWrapper>
-      <button onClick={() => mutate(_id)}>삭제</button>
     </CartItemWrapper>
   );
 };
@@ -77,11 +77,23 @@ export const CartItemWrapper = styled.div`
 `;
 
 export const QuantityCouterWrapper = styled.div`
-  width: 100px;
+  width: 130px;
+  display: flex;
+  flex-direction: row;
 `;
 
 export const ImageWrapper = styled.img`
   width: 100px;
   height: 100px;
   background-color: var(--bg-gray);
+`;
+
+export const DeleteButton = styled.button`
+  width: 64px;
+  height: 36px;
+  padding: 8px;
+  box-sizing: border-box;
+  background-color: var(--alert-red);
+  color: var(--pure-white);
+  align-self: center;
 `;
