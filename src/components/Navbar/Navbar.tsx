@@ -30,6 +30,7 @@ const Navbar = () => {
               weight={"var(--medium)"}
               onClick={logoutHandler}
               role="button"
+              className="pointer"
             >
               로그아웃
             </Text>
