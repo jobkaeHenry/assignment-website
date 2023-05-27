@@ -2,7 +2,7 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { Modal } from "./components/GlobalModal/Modal";
 import Navbar from "./components/Navbar/Navbar";
 import { Suspense, lazy } from "react";
-import NestedLayout, { LogOutOnly, UserOnly } from "./layouts/router/Layout";
+import { LogOutOnly, UserOnly } from "./layouts/router/Layout";
 import Main from "./pages/Main/Main";
 import { LoadingSpinner } from "./components/atom/lodaing/Spinner";
 import { css } from "@emotion/react";
