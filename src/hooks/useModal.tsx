@@ -8,8 +8,9 @@ import {
 const useModal = () => {
   const [ModalComponent, setModalComponent] =
     useRecoilState(modalComponentAtom);
-  const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenAtom);
 
+  const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenAtom);
+  console.log(isModalOpen)
   /** 모달로 사용할 컴포넌트를 인자로 받아 모달을 생성 */
   const onClickModal = (component: React.ReactNode) => {
     if (ModalComponent !== component) {

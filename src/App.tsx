@@ -1,15 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Modal } from "./components/GlobalModal/Modal";
 import Navbar from "./components/Navbar/Navbar";
-import { useRecoilState } from "recoil";
-import { cleanLS, getLS } from "./utils/localStorage";
-import { Suspense, lazy, useEffect } from "react";
-import { LoginStatus } from "./context/recoil/atom/user";
+import { Suspense, lazy } from "react";
 import NestedLayout, { LogOutOnly, UserOnly } from "./layouts/router/Layout";
 import Main from "./pages/Main/Main";
 import { LoadingSpinner } from "./components/atom/lodaing/Spinner";
 import { css } from "@emotion/react";
-import React from "react";
+
 
 // 페이지 진입시만 불러올 것
 const Missing = lazy(() => import("./pages/Error/MissingPage"));

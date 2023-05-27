@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { cloneElement, ReactElement } from "react";
+import { cloneElement, ReactElement } from "react";
 
 type Props = {
   children: ReactElement | ReactElement[];

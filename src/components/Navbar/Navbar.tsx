@@ -1,7 +1,6 @@
 import { useRecoilValue } from "recoil";
 import { LoginStatus } from "../../context/recoil/atom/user";
-import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../atom/form/Button";
+import { Link } from "react-router-dom";
 import { login, userPage, signUp } from "../../data/URL/local/user/url";
 import Text from "../atom/Text";
 import styled from "@emotion/styled";
@@ -12,8 +11,6 @@ import useLogout from "../../hooks/user/useSetIsLogout";
 const Navbar = () => {
   const logoutHandler = useLogout();
   const hasLogin = useRecoilValue(LoginStatus);
-  const navigate = useNavigate();
-
   return (
     <NavWrapper>
       <Link to={"/"}>
@@ -32,6 +29,7 @@ const Navbar = () => {
               typography="p"
               weight={"var(--medium)"}
               onClick={logoutHandler}
+              role="button"
             >
               로그아웃
             </Text>
