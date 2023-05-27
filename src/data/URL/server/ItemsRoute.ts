@@ -9,6 +9,16 @@ export const getItemRoute = (id: string) => `/items/${id}`;
 export const getItemsByUserId = "/items";
 
 /**
+ * Query를 사용해 상품리스트를 불러 오는 링크를 리턴
+ * @param pageNum 불러올 페이지
+ * @param quantity 한페이지 당 갯수
+ * @returns 
+ */
+export const getItemsByPageNum = (pageNum: number, quantity = 5) => {
+  return `/items?pageNum=${pageNum}&num=${quantity}`;
+};
+
+/**
  * [post] 새로운 상품을 추가하는 Route
  */
 export const createItemUrl = "/items";
