@@ -1,10 +1,11 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FormValues } from "../types/FormValueType";
 import useSetIsLogin from "../../../hooks/user/useSetIsLogin";
 import { login } from "../../../data/URL/local/user/url";
+import axios from "../../../lib/api/axios";
 
 /**
  * 로그인 핸들러와 에러메시지를 리턴하는 함수
