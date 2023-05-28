@@ -11,7 +11,7 @@ jobs:
       - name: Checkout source code.
         uses: actions/checkout@v3
       - name: Generate Environment Variables File for Production baseURL
-        run: echo "VITE_BASE_URLL=$VITE_BASE_URL" >> .env
+        run: echo "VITE_BASE_URL=$VITE_BASE_URL" >> .env.production
         working-directory: ./
         env:
           REACT_APP_BASE_URL: ${{ secrets.VITE_BASE_URL }}
