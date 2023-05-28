@@ -61,3 +61,5 @@ https://github.com/jobkaeHenry/assignment-server
 ## 아키텍쳐
 ![image](https://github.com/jobkaeHenry/assignment-website/assets/100949102/df36a36f-a7b1-48f6-92f0-d89ef4527d38)
 
+## 추가해야 하는 기능
+infinite query / toast alarm☆☆☆ / 간단 통계
