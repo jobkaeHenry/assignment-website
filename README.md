@@ -1,10 +1,14 @@
 # Plugo-assignment-website
-
-
 ## 🔗 배포링크
-http://plugo-assignment.s3-website.ap-northeast-2.amazonaws.com/
+http://plugo-assignment.s3-website.ap-northeast-2.amazonaws.com/ </br>
 Github Action으로 CI/CD 를 구축하여 AWS S3버킷에 업로드된 정적 웹사이트입니다.
+![image](https://github.com/jobkaeHenry/assignment-website/assets/100949102/45505cb0-bf44-4934-b7f3-6e2d3c72962e)
 
+## 🔗 서버 Repository
+https://github.com/jobkaeHenry/assignment-server
+</br>
+
+##  커맨드
 ### `yarn dev`
 
 터미널에 yarn start 커맨드를 입력시, 개발 모드로 실행됩니다
@@ -13,9 +17,8 @@ Github Action으로 CI/CD 를 구축하여 AWS S3버킷에 업로드된 정적 �
 
 터미널에 yarn build 커맨드를 입력시, 프로덕션 모드로 빌드합니다.
 
-<!-- ### `yarn test`
-터미널에 yarn test 커맨드를 입력시, Test 를 진행합니다. -->
-### Commit Message
+
+## Commit Message
 | Icon  | Description              |
 | ----- | ------------------------ |
 | ✨    | 신규 기능 추가           |
