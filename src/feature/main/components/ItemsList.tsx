@@ -6,6 +6,7 @@ import ItemCard from "./Items/ItemCard";
 import PaddingLayout from "../../../layouts/PaddingLayout";
 
 import { NotifyMessage } from "../../../components/atom/lodaing/Error";
+import { css } from "@emotion/react";
 
 interface Props {
   pageNum?: number;
@@ -17,7 +18,7 @@ const ItemsList = ({ pageNum = 1 }: Props) => {
   );
 
   return (
-    <PaddingLayout flexDirection="row">
+    <PaddingLayout flexDirection="row" css={overFlowX}>
       {data?.length !== 0 ? (
         data?.map((e) => <ItemCard data={e} key={e.id}></ItemCard>)
       ) : (
@@ -26,5 +27,9 @@ const ItemsList = ({ pageNum = 1 }: Props) => {
     </PaddingLayout>
   );
 };
+
+const overFlowX = css`
+  overflow-y: auto;
+`
 
 export default ItemsList;

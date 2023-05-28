@@ -59,6 +59,10 @@ const AddItemModal = () => {
           refetchInactive: true,
         });
         queryClient.invalidateQueries({
+          queryKey: ["AllItems"],
+          refetchInactive: true,
+        });
+        queryClient.invalidateQueries({
           queryKey: ["SellingItems",userId],
           refetchInactive: true,
         });

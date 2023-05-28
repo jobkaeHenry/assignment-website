@@ -14,9 +14,11 @@ export const getItemsByUserId =(id:string)=> `/user/${id}/sellingItems`;
  * @param quantity 한페이지 당 갯수
  * @returns 
  */
-export const getItemsByPageNum = (pageNum: number, quantity = 5) => {
+export const getItemsByPageNum = (pageNum: number, quantity = 10) => {
   return `/items?pageNum=${pageNum}&num=${quantity}`;
 };
+
+export const getAllItemsRoute = '/items/all'
 
 /**
  * [post] 새로운 상품을 추가하는 Route
