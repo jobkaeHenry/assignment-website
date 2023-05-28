@@ -23,16 +23,18 @@ const SellingItemElem = ({ data }: Props) => {
     "SellingItems",
     userId,
   ])[0][1] as ItemType[];
-
+  
   const { mutate } = useMutation(
     (id: string) => axiosPrivate.delete(deleteItemRoute(id)),
     {
       onMutate: () => {
         queryClient.invalidateQueries({
-          queryKey: ["Cartitems","Items"],
+          queryKey: ["Items"],
           refetchInactive: true,
         });
-        queryClient.setQueryData(["SellingItems", userId], () =>
+      },
+      onSuccess:()=>{
+          queryClient.setQueryData(["SellingItems", userId], () =>
           previousData.filter((e) => e.id !== id)
         );
       },
