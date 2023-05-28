@@ -6,7 +6,7 @@ import Skeleton from "../../components/atom/lodaing/Skeleton";
 import ErrorMessage from "../../components/atom/lodaing/Error";
 import ItemsList from "../../feature/main/components/ItemsList";
 import Text from "../../components/atom/Text";
-import Divider from "../../components/atom/DIvider";
+import Divider from "../../components/atom/Divider";
 
 const ItemDetailPage = () => {
   return (

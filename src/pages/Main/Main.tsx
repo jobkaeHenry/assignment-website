@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import ErrorMessage from "../../components/atom/lodaing/Error";
 import PaddingLayout from "./../../layouts/PaddingLayout";
 import Text from "../../components/atom/Text";
-import Divider from "../../components/atom/DIvider";
+import Divider from "../../components/atom/Divider";
 
 const Main = () => {
   useSetTitle("Assignment");
