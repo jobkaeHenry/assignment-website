@@ -14,7 +14,7 @@ jobs:
         run: echo "VITE_BASE_URL=$VITE_BASE_URL" >> .env
         working-directory: ./
         env:
-          REACT_APP_BASE_URL: ${{ secrets.VITE_BASE_URL }}
+          VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
       - name: Install dependencies
         run: yarn
         working-directory: ./
