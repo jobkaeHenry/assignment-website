@@ -1,48 +1,20 @@
-import { useMutation, useQueryClient } from "react-query";
 import Text from "../../../../components/atom/Text";
 import { ItemType } from "../../../items/types/itemDataTypes";
 import styled from "@emotion/styled";
-import { addToCartRoute } from "../../../../data/URL/server/cartRoute";
-
-import { useState } from "react";
 import { LoadingSpinner } from "../../../../components/atom/lodaing/Spinner";
-import { axiosPrivate } from "../../../../lib/api/axios";
-import { userInfoAtom } from "../../../../context/recoil/atom/user";
-import { useRecoilValue } from "recoil";
-import { AxiosError } from "axios";
+import { Link } from "react-router-dom";
+import { itemDescription } from "../../../../data/URL/local/user/url";
+import { useAddToCart } from "./useAddToCart";
+
 
 type Props = {
   data: ItemType;
 };
 
 const ItemCard = ({ data }: Props) => {
-  const [isProceeding, setIsProceeding] = useState(false);
-  const { userId } = useRecoilValue(userInfoAtom);
   const { description, id, image, price, title } = data;
-  const queryClient = useQueryClient();
 
-  const { mutate } = useMutation(
-    (id: string) => axiosPrivate.post(addToCartRoute, { itemId: id }),
-    {
-      onMutate: () => {
-        setIsProceeding(true);
-      },
-      onSuccess: () => {
-        // 토스트 팝업해야함
-        setIsProceeding(false);
-        queryClient.invalidateQueries({
-          queryKey: ["Cartitems", userId],
-          refetchInactive: true,
-        });
-      },
-      onError: (error:AxiosError) => {
-        if(error.response?.status===400){
-          setIsProceeding(false);
-          alert('이미 추가된 아이템입니다')
-        }
-      },
-    }
-  );
+  const { isProceeding, addToCartHandler } = useAddToCart();
 
   return (
     <CardWrapper>
@@ -51,12 +23,14 @@ const ItemCard = ({ data }: Props) => {
           role="button"
           title="장바구니에 추가"
           onClick={() => {
-            if (!isProceeding) mutate(id);
+            if (!isProceeding) addToCartHandler(id);
           }}
         >
           {isProceeding ? <LoadingSpinner size={24} /> : "+"}
         </AddToCartBtn>
-        <img src={image} alt={title} />
+        <Link to={itemDescription(id)}>
+          <img src={image} alt={title} />
+        </Link>
       </ImageWrapper>
       <Text typography={"h4"} weight="var(--medium)">
         {title}
@@ -78,7 +52,7 @@ const ImageWrapper = styled.div`
   width: 240px;
   height: 240px;
   background-color: var(--bg-gray);
-  & > img {
+  & img {
     width: 240px;
     height: 240px;
     object-fit: cover;
