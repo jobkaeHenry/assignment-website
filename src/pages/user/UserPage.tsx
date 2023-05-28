@@ -1,6 +1,5 @@
 import { useRecoilValue } from "recoil";
 import ErrorMessage from "../../components/atom/lodaing/Error";
-import Skeleton from "../../components/atom/lodaing/Skeleton";
 import CartItemList from "../../feature/cart/components/CartItemList";
 import useSetTitle from "../../hooks/useSetTitle";
 import PaddingLayout from "../../layouts/PaddingLayout";
@@ -11,6 +10,7 @@ import { RowWrapper } from "./../../layouts/Wrapper";
 import { userInfoAtom } from "../../context/recoil/atom/user";
 import SellingItemList from "../../feature/cart/components/SellingItemList";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import CartItemSkeleton from "../../feature/cart/components/CartItemSkeleton";
 
 const UserPage = () => {
   useSetTitle("My page");
@@ -21,7 +21,7 @@ const UserPage = () => {
       <RowWrapper>
         <DashBoard />
         {!isSellerNow && (
-          <Suspense fallback={<Skeleton />}>
+          <Suspense fallback={<CartItemSkeleton />}>
             <ErrorBoundary
               fallback={
                 <ErrorMessage message={"아이템을 불러오지 못했습니다"} />
@@ -32,7 +32,7 @@ const UserPage = () => {
           </Suspense>
         )}
         {isSellerNow && (
-          <Suspense fallback={<Skeleton />}>
+          <Suspense fallback={<CartItemSkeleton />}>
             <ErrorBoundary
               fallback={
                 <ErrorMessage message={"아이템을 불러오지 못했습니다"} />
