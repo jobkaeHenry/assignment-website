@@ -2,7 +2,7 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { Modal } from "./components/GlobalModal/Modal";
 import Navbar from "./components/Navbar/Navbar";
 import { Suspense, lazy } from "react";
-import { LogOutOnly, UserOnly } from "./layouts/router/Layout";
+import { FooterLayout, LogOutOnly, UserOnly } from "./layouts/router/Layout";
 import Main from "./pages/Main/Main";
 import { LoadingSpinner } from "./components/atom/lodaing/Spinner";
 import { css } from "@emotion/react";
@@ -19,7 +19,7 @@ const UserPage = lazy(() => import("./pages/user/UserPage"));
 
 function App() {
   useInitialLoginCheck();
-  useAxiosPrivate()
+  useAxiosPrivate();
 
   return (
     <BrowserRouter>
@@ -28,19 +28,21 @@ function App() {
       <Suspense fallback={<LoadingSpinner css={centerPosition} size={46} />}>
         <Routes>
           <Route element={<MarginTopLayout />}>
-            <Route path="/" element={<Main />} />
-            {/* 아이템 상세페이지 */}
-            <Route path="/item/:id" element={<ItemDetail />} />
+            <Route element={<FooterLayout />}>
+              <Route path="/" element={<Main />} />
+              {/* 아이템 상세페이지 */}
+              <Route path="/item/:id" element={<ItemDetail />} />
+            </Route>
             {/* 유저라우트 */}
             <Route path="user" element={<Outlet />}>
-              {/* 유저전용 라우트 */}
-              <Route element={<UserOnly />}>
-                <Route index element={<UserPage />} />
-              </Route>
               {/* 비회원 전용 라우트 */}
               <Route element={<LogOutOnly />}>
                 <Route path="login" element={<Login />} />
                 <Route path="signup" element={<Signup />} />
+              </Route>
+              {/* 유저전용 라우트 */}
+              <Route element={<UserOnly />}>
+                <Route index element={<UserPage />} />
               </Route>
             </Route>
             {/* 404 */}

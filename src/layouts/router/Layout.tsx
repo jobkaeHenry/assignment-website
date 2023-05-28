@@ -6,6 +6,7 @@ import useSetIsLogout from "../../hooks/user/useSetIsLogout";
 import { getLS } from "../../utils/localStorage";
 import Navbar from "../../components/Navbar/Navbar";
 import { userPage } from "../../data/URL/local/user/url";
+import Footer from "../../components/Footer";
 
 /**
  * 로그인한 경우 메인페이지로 Redirect 시키는 HOC
@@ -38,14 +39,12 @@ export const UserOnly = () => {
     <Navigate state={{ from: currentLocation }} to="/user/login" replace />
   );
 };
-/** 네비게이션 바가 포함된 레이아웃 HOC */
-export const HeaderLayout = () => {
+/** 푸터 가 포함된 레이아웃 HOC */
+export const FooterLayout = () => {
   return (
     <>
-      <Navbar />
-      <DefaultLayout>
-        <Outlet />
-      </DefaultLayout>
+      <Outlet />
+      <Footer></Footer>
     </>
   );
 };
