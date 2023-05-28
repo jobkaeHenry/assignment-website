@@ -9,7 +9,7 @@ export const getLS = (key: string) => {
   }
 };
 
-export const setLS = (key: string, value: any) => {
+export const setLS = (key: string, value: unknown) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
 
