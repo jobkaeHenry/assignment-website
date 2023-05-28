@@ -9,6 +9,7 @@ import { LoadingSpinner } from "../../../../components/atom/lodaing/Spinner";
 import { axiosPrivate } from "../../../../lib/api/axios";
 import { userInfoAtom } from "../../../../context/recoil/atom/user";
 import { useRecoilValue } from "recoil";
+import { AxiosError } from "axios";
 
 type Props = {
   data: ItemType;
@@ -33,6 +34,12 @@ const ItemCard = ({ data }: Props) => {
           queryKey: ["Cartitems", userId],
           refetchInactive: true,
         });
+      },
+      onError: (error:AxiosError) => {
+        if(error.response?.status===400){
+          setIsProceeding(false);
+          alert('이미 추가된 아이템입니다')
+        }
       },
     }
   );
@@ -74,6 +81,7 @@ const ImageWrapper = styled.div`
   & > img {
     width: 240px;
     height: 240px;
+    object-fit: cover;
   }
 `;
 
