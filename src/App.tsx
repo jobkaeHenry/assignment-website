@@ -8,7 +8,7 @@ import { LoadingSpinner } from "./components/atom/lodaing/Spinner";
 import { css } from "@emotion/react";
 import useInitialLoginCheck from "./hooks/user/useInitialLoginCheck";
 import MarginTopLayout from "./layouts/router/Layout";
-import ItemDetail from "./pages/Items/ItemDetail";
+import ItemDetail from "./pages/Items/ItemDetailPage";
 import useAxiosPrivate from "./hooks/useAxiosPrivate";
 
 // 페이지 진입시만 불러올 것
