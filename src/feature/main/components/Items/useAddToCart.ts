@@ -27,8 +27,8 @@ export const useAddToCart = () => {
         });
       },
       onError: (error: AxiosError) => {
+        setIsProceeding(false);
         if (error.response?.status === 400) {
-          setIsProceeding(false);
           alert("이미 추가된 아이템입니다");
         }
       },
