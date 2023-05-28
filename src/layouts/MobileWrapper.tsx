@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 const MobileWrapper = styled.div`
   width: 100%;
-  max-width: 768px;
+  max-width: 1024px;
   margin: 0 auto;
   margin-top: 10px;
   padding: 16px;

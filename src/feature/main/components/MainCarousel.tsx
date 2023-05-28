@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 
 const MainCarousel = () => {
   return (
-    <Carousel autoPlay infiniteLoop showThumbs={false} showArrows={false}>
+    <Carousel autoPlay infiniteLoop showThumbs={false} showArrows={false} emulateTouch showStatus={false}>
       <CarouselWarpper src="https://d2kchovjbwl1tk.cloudfront.net/vendors/19/assets/image/1685114333408-GG_Banner_Website.jpg" />
       <CarouselWarpper src="https://d2kchovjbwl1tk.cloudfront.net/vendors/19/assets/image/1684890670432-GG_Banner_Website_8.jpg" />
     </Carousel>

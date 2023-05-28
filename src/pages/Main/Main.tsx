@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import ErrorMessage from "../../components/atom/lodaing/Error";
 import PaddingLayout from "./../../layouts/PaddingLayout";
 import Text from "../../components/atom/Text";
+import Divider from "../../components/atom/DIvider";
 
 const Main = () => {
   useSetTitle("Assignment");
@@ -14,6 +15,7 @@ const Main = () => {
   return (
     <>
       <MainCarousel />
+      <Divider/>
       <PaddingLayout>
         <Text typography="h3" bold>
           최신 아이템
