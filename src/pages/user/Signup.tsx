@@ -59,8 +59,8 @@ const Signup = () => {
           weight={"var(--regular)"}
           label={"이메일"}
           placeholder={"이메일"}
+          error={errors.email?true:false}
           // 이메일 훅폼
-          error={errors.email ? true : false}
           {...register("email", {
             required: true,
             pattern: emailRegExp,
@@ -73,7 +73,7 @@ const Signup = () => {
           inputWidth={"100%"}
           weight={"var(--regular)"}
           placeholder={"비밀번호"}
-          error={errors.password ? true : false}
+          error={errors.password?true:false}
           // 패스워드 훅폼
           {...register("password", {
             required: true,
@@ -86,7 +86,6 @@ const Signup = () => {
           inputWidth={"100%"}
           weight={"var(--regular)"}
           placeholder={"비밀번호 확인"}
-          error={errors.isSamePassword ? true : false}
           // 패스워드 동일여부
           {...register("isSamePassword", {
             required: true,
@@ -103,7 +102,7 @@ const Signup = () => {
           inputWidth={"100%"}
           weight={"var(--regular)"}
           placeholder={"닉네임을 입력해주세요"}
-          error={errors.userName ? true : false}
+          error={errors.userName?true:false}
           {...register("userName", {
             required: true,
             pattern:KoEnNumExp,
