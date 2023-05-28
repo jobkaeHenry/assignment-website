@@ -51,3 +51,9 @@ https://github.com/jobkaeHenry/assignment-server
 **배포 및 관리**<br>
 <img src="https://img.shields.io/badge/Amazon_AWS-232F3E?style=flat-square&logo=Amazon AWS&logoColor=white"/>
 <br>
+
+## 요구사항 정의
+![image](https://github.com/jobkaeHenry/assignment-website/assets/100949102/3dc732db-ea8e-4274-818e-d5666b478a81)
+<br>
+## 사이트 맵
+![image](https://github.com/jobkaeHenry/assignment-website/assets/100949102/b2eefa7b-da00-4ea2-ae39-34c611b8bcab)
