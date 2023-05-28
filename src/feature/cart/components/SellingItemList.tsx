@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import { NotifyMessage } from "../../../components/atom/lodaing/Error";
-import axios, { axiosPrivate } from "../../../lib/api/axios";
+import axios from "../../../lib/api/axios";
 import { useRecoilValue } from "recoil";
 import { userInfoAtom } from "../../../context/recoil/atom/user";
 import { css } from "@emotion/react";

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getLS } from "../../utils/localStorage";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const BASE_URL_DEV = import.meta.env.VITE_BASE_URL_DEV;

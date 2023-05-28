@@ -21,8 +21,15 @@ export const useLoginHandler = () => {
       .post(login, data)
       .then(({ data }) => {
         console.log(data);
-        const { accessToken, refreshToken, isSeller, userId, userName } = data;
-        setUserInfo({ isSeller, userId, userName });
+        const {
+          accessToken,
+          refreshToken,
+          isSeller,
+          userId,
+          userName,
+          isSellerNow,
+        } = data;
+        setUserInfo({ isSeller, userId, userName, isSellerNow });
         loginHandler({ accessToken, refreshToken });
         navigate(from);
       })

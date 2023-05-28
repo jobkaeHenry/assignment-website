@@ -6,7 +6,6 @@ import { CartItemType } from "../types/cartItemsType";
 import { axiosPrivate } from "../../../lib/api/axios";
 import { useRecoilValue } from "recoil";
 import { userInfoAtom } from "../../../context/recoil/atom/user";
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { useMemo } from "react";
 import Text from "../../../components/atom/Text";
