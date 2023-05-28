@@ -4,7 +4,6 @@ import DefaultLayout from "../DefaultLayout";
 import { LoginStatus } from "../../context/recoil/atom/user";
 import useSetIsLogout from "../../hooks/user/useSetIsLogout";
 import { getLS } from "../../utils/localStorage";
-import Navbar from "../../components/Navbar/Navbar";
 import { userPage } from "../../data/URL/local/user/url";
 import Footer from "../../components/Footer";
 
