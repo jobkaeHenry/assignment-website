@@ -1,10 +1,71 @@
+import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
+import axios from "../../../lib/api/axios";
+import { getItemRoute } from "../../../data/URL/server/ItemsRoute";
+import { ItemType } from "../types/itemDataTypes";
+import Text from "../../../components/atom/Text";
+import styled from "@emotion/styled";
+import { ColumnWrapper, RowWrapper } from "../../../layouts/Wrapper";
+import { Button } from "./../../../components/atom/form/Button";
+import { useAddToCart } from "../../main/components/Items/useAddToCart";
+import useSetTitle from "../../../hooks/useSetTitle";
 
-type Props = {}
+const ItemDetail = () => {
+  const { id } = useParams();
+  const { data } = useQuery<ItemType>(["ItemDetail", id], () => {
+    return axios.get(getItemRoute(id || "")).then(({ data }) => data);
+  });
+  const { addToCartHandler } = useAddToCart();
+  useSetTitle(data!.title)
 
-const ItemDetail = (props: Props) => {
   return (
-    <div>ItemDetail</div>
-  )
-}
+    <RowWrapper>
+      <ItemImage src={data?.image} alt={`${data?.title} 이미지`} />
+      <DescriptionWrapper>
+        <ColumnWrapper>
+          <Text typography="h2" bold>
+            {data?.title}
+          </Text>
+          <Text typography="p">{data?.description}</Text>
+          <Text typography="h3" bold>
+            {data?.price.toLocaleString() + "원"}
+          </Text>
+        </ColumnWrapper>
 
-export default ItemDetail
+        <ColumnWrapper>
+          <TermWrapper>
+            Pengiriman Kirim ke: Dikirim dalam 24 jam, (Setelah pembayaran
+            dikonfirmasi)
+          </TermWrapper>
+
+          <Button onClick={() => addToCartHandler(data!.id)}>
+            장바구니에 추가
+          </Button>
+        </ColumnWrapper>
+      </DescriptionWrapper>
+    </RowWrapper>
+  );
+};
+
+const ItemImage = styled.img`
+  width: 400px;
+  height: 600px;
+  object-fit: cover;
+`;
+
+const DescriptionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  height: 600px;
+  padding: 32px;
+`;
+
+const TermWrapper = styled.div`
+  padding: 32px;
+  border: 1px solid var(--line-gray);
+`;
+
+export default ItemDetail;
