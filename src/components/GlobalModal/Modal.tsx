@@ -28,7 +28,7 @@ export const Modal = () => {
       <ModalBackDrop
         height={height}
         onClick={() => {
-          window.history.back();
+          // window.history.back();
           setIsModalOpen(false);
         }}
       >
