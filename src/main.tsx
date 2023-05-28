@@ -13,10 +13,11 @@ export const queryClient = new QueryClient({
       refetchOnWindowFocus: false,
       useErrorBoundary: true,
       suspense: true,
+      
     },
     mutations: {
       retry: 0,
-      useErrorBoundary: true,
+      useErrorBoundary: false,
     },
   },
 });
