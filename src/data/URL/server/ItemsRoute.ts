@@ -6,7 +6,7 @@ export const getItemRoute = (id: string) => `/items/${id}`;
 /**
  * [get] userID를 Body로 받아 해당 유저가 판매중인 상품을 모두 보여줌
  */
-export const getItemsByUserId = "/items";
+export const getItemsByUserId =(id:string)=> `/user/${id}/sellingItems`;
 
 /**
  * Query를 사용해 상품리스트를 불러 오는 링크를 리턴

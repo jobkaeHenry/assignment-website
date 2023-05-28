@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import { NotifyMessage } from "../../../components/atom/lodaing/Error";
-import { axiosPrivate } from "../../../lib/api/axios";
+import axios, { axiosPrivate } from "../../../lib/api/axios";
 import { useRecoilValue } from "recoil";
 import { userInfoAtom } from "../../../context/recoil/atom/user";
 import { css } from "@emotion/react";
@@ -14,8 +14,8 @@ const SellingItemList = () => {
   const { userId } = useRecoilValue(userInfoAtom);
 
   const { data } = useQuery<ItemType[]>(["SellingItems", userId], () =>
-    axiosPrivate
-      .get(getItemsByUserId, { data: { userId: userId } })
+    axios
+      .get(getItemsByUserId(userId?userId:''))
       .then(({ data }) => {
         return data;
       })
