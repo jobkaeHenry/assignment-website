@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import InputWithLabel from "../../../components/atom/form/InputWithLabel";
 import TextArea from "../../../components/atom/form/TextArea";
 import Text from "../../../components/atom/Text";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Button } from "./../../../components/atom/form/Button";
 import { axiosPrivate } from "../../../lib/api/axios";
 import { createItemUrlRoute } from "../../../data/URL/server/ItemsRoute";
@@ -38,14 +38,14 @@ const AddItemModal = () => {
     (data: NewItemFormValue) => {
       return axiosPrivate.post(createItemUrlRoute, {
         ...data,
-        image: "이미지",
+        image: "https://d2kchovjbwl1tk.cloudfront.net/vendor/19/product/Brown_1676186065453_resized512-jpg.webp",
       });
     },
     {
       onMutate: (data) => {
         queryClient.setQueryData(["SellingItems", userId], () => [
           ...previousData,
-          { ...data, image: "이미지", seller: userId },
+          { ...data, image: "https://d2kchovjbwl1tk.cloudfront.net/vendor/19/product/Brown_1676186065453_resized512-jpg.webp", seller: userId },
         ]);
         setOpenModal(false)
       },
