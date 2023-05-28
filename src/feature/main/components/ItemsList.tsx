@@ -17,7 +17,7 @@ const ItemsList = ({ pageNum = 1 }: Props) => {
   );
 
   return (
-    <PaddingLayout>
+    <PaddingLayout flexDirection="row">
       {data?.length !== 0 ? (
         data?.map((e) => <ItemCard data={e} key={e.id}></ItemCard>)
       ) : (

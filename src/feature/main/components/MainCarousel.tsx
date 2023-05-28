@@ -5,18 +5,19 @@ import styled from "@emotion/styled";
 const MainCarousel = () => {
   return (
     <Carousel autoPlay infiniteLoop showThumbs={false} showArrows={false}>
-      <CarouselWarpper>안녕</CarouselWarpper>
-      <CarouselWarpper>안녕</CarouselWarpper>
+      <CarouselWarpper src="https://d2kchovjbwl1tk.cloudfront.net/vendors/19/assets/image/1685114333408-GG_Banner_Website.jpg" />
+      <CarouselWarpper src="https://d2kchovjbwl1tk.cloudfront.net/vendors/19/assets/image/1684890670432-GG_Banner_Website_8.jpg" />
     </Carousel>
   );
 };
 
 export default MainCarousel;
 
-const CarouselWarpper = styled.div`
+const CarouselWarpper = styled.img`
   width: 100%;
   height: calc(90vh - 76px);
   display: flex;
+  object-fit: cover;
   align-items: center;
   justify-content: center;
 `;

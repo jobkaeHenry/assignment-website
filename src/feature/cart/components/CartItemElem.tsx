@@ -86,6 +86,7 @@ export const ImageWrapper = styled.img`
   width: 100px;
   height: 100px;
   background-color: var(--bg-gray);
+  object-fit: cover;
 `;
 
 export const DeleteButton = styled.button`
