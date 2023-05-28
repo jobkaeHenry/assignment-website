@@ -1,9 +1,14 @@
 import { ItemType } from "../../items/types/itemDataTypes";
 import { ColumnWrapper, RowWrapper } from "../../../layouts/Wrapper";
-import { CartItemWrapper, ImageWrapper } from "./CartItemElem";
+import { CartItemWrapper, DeleteButton, ImageWrapper } from "./CartItemElem";
 import { Link } from "react-router-dom";
 import Text from "../../../components/atom/Text";
 import { itemDescription } from "../../../data/URL/local/user/url";
+import { useMutation, useQueryClient } from "react-query";
+import { useRecoilValue } from "recoil";
+import { userInfoAtom } from "../../../context/recoil/atom/user";
+import { axiosPrivate } from "../../../lib/api/axios";
+import { deleteItemRoute } from "../../../data/URL/server/ItemsRoute";
 
 type Props = {
   data: ItemType;
@@ -11,6 +16,31 @@ type Props = {
 
 const SellingItemElem = ({ data }: Props) => {
   const { description, image, id, price, title } = data;
+  const queryClient = useQueryClient();
+  const { userId } = useRecoilValue(userInfoAtom);
+
+  const previousData = queryClient.getQueriesData([
+    "SellingItems",
+    userId,
+  ])[0][1] as ItemType[];
+
+  const { mutate } = useMutation(
+    (id: string) => axiosPrivate.delete(deleteItemRoute(id)),
+    {
+      onMutate: () => {
+        queryClient.invalidateQueries({
+          queryKey: ["Cartitems","Items"],
+          refetchInactive: true,
+        });
+        queryClient.setQueryData(["SellingItems", userId], () =>
+          previousData.filter((e) => e.id !== id)
+        );
+      },
+      onError: () => {
+        queryClient.setQueryData(["SellingItems", userId], () => previousData);
+      },
+    }
+  );
 
   return (
     <CartItemWrapper>
@@ -26,6 +56,7 @@ const SellingItemElem = ({ data }: Props) => {
           <Text typography="p">{price}</Text>
         </ColumnWrapper>
       </RowWrapper>
+      <DeleteButton onClick={() => mutate(id)}>삭제</DeleteButton>
     </CartItemWrapper>
   );
 };

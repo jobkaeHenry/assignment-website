@@ -9,21 +9,31 @@ import { ItemType } from "../../items/types/itemDataTypes";
 import SellingItemElem from "./SellingItemElem";
 import { Button } from "../../../components/atom/form/Button";
 import useModal from "./../../../hooks/useModal";
+import { ItemListWrapper } from "./CartItemList";
+import Text from "../../../components/atom/Text";
+import styled from "@emotion/styled";
+import AddItemModal from "./AddItemModal";
 
 const SellingItemList = () => {
   const { userId } = useRecoilValue(userInfoAtom);
 
   const { data } = useQuery<ItemType[]>(["SellingItems", userId], () =>
-    axios
-      .get(getItemsByUserId(userId?userId:''))
-      .then(({ data }) => {
-        return data;
-      })
+    axios.get(getItemsByUserId(userId ? userId : "")).then(({ data }) => {
+      return data;
+    })
   );
   const onClickModal = useModal();
 
   return (
-    <div css={width100}>
+    <ItemListWrapper>
+      <TitleWrapper>
+        <Text typography="h3" bold>
+          판매중인 상품
+        </Text>
+        <Button css={addItem} onClick={() => onClickModal(<AddItemModal/>)}>
+          아이템추가
+        </Button>
+      </TitleWrapper>
       {data!.length !== 0 ? (
         data!.map((sellingItem, i) => (
           <SellingItemElem data={sellingItem} key={sellingItem.id + i} />
@@ -31,14 +41,22 @@ const SellingItemList = () => {
       ) : (
         <NotifyMessage message="판매중인 상품이 없습니다"></NotifyMessage>
       )}
-      <Button onClick={() => onClickModal(<>모달테스트</>)}>아이템추가</Button>
-    </div>
+    </ItemListWrapper>
   );
 };
 
-export default SellingItemList;
-
-const width100 = css`
+export const TitleWrapper = styled.div`
   width: 100%;
-  height: calc(100vh - 76px);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
+const addItem = css`
+  width: fit-content;
+  padding: 8px;
+  font-size: var(--p);
+  background-color: var(--sub-color);
+`
+
+
+export default SellingItemList;
