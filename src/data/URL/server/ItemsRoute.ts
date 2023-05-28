@@ -21,7 +21,7 @@ export const getItemsByPageNum = (pageNum: number, quantity = 5) => {
 /**
  * [post] 새로운 상품을 추가하는 Route
  */
-export const createItemUrl = "/items";
+export const createItemUrlRoute = "/items";
 
 /**
  * [delete] 아이템 id로 해당 아이템을 삭제하는 Route
