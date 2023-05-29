@@ -21,12 +21,10 @@ const DashBoard = () => {
       setUserInfo((prev) => ({ ...prev, isSellerNow: !prev.isSellerNow }));
     }
     if (!isSeller) {
-      if (confirm("셀러가 아닙니다 셀러로 전환하시겠습니까?")) {
-        upgradeRole().then(() => {
-          setUserInfo((prev) => ({ ...prev, isSellerNow: true }));
-          alert("전환 완료되었습니다");
-        });
-      }
+      upgradeRole().then(() => {
+        setUserInfo((prev) => ({ ...prev, isSellerNow: true }));
+        alert("전환 완료되었습니다");
+      });
     }
   };
   return (

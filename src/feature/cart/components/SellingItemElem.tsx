@@ -9,6 +9,7 @@ import { useRecoilValue } from "recoil";
 import { userInfoAtom } from "../../../context/recoil/atom/user";
 import { axiosPrivate } from "../../../lib/api/axios";
 import { deleteItemRoute } from "../../../data/URL/server/ItemsRoute";
+import fireToast from "../../../lib/toastify/fireToast";
 
 type Props = {
   data: ItemType;
@@ -28,6 +29,7 @@ const SellingItemElem = ({ data }: Props) => {
     (id: string) => axiosPrivate.delete(deleteItemRoute(id)),
     {
       onSuccess: () => {
+        fireToast('삭제에 성공했습니다','success')
         queryClient.setQueryData(["SellingItems", userId], () =>
           previousData.filter((e) => e.id !== id)
         );
@@ -42,6 +44,7 @@ const SellingItemElem = ({ data }: Props) => {
       },
       onError: () => {
         queryClient.setQueryData(["SellingItems", userId], () => previousData);
+        fireToast('삭제에 실패했습니다','error')
       },
     }
   );

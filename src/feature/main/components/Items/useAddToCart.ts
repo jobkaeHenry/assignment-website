@@ -5,6 +5,7 @@ import { userInfoAtom } from "../../../../context/recoil/atom/user";
 import { useState } from "react";
 import { addToCartRoute } from "../../../../data/URL/server/cartRoute";
 import { AxiosError } from "axios";
+import fireToast from "../../../../lib/toastify/fireToast";
 
 export const useAddToCart = () => {
   const [isProceeding, setIsProceeding] = useState(false);
@@ -19,7 +20,7 @@ export const useAddToCart = () => {
         setIsProceeding(true);
       },
       onSuccess: () => {
-        // 토스트 팝업해야함
+        fireToast('장바구니에 추가됬습니다','success')
         setIsProceeding(false);
         queryClient.invalidateQueries({
           queryKey: ["Cartitems", userId],
@@ -29,9 +30,10 @@ export const useAddToCart = () => {
       onError: (error: AxiosError) => {
         setIsProceeding(false);
         if (error.response?.status === 400) {
-          alert("이미 추가된 아이템입니다");
+          fireToast('이미 추가된 아이템입니다','error')
         }
       },
+      
     }
   );
   return { addToCartHandler: mutate, isProceeding };

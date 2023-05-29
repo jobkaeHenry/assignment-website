@@ -10,6 +10,8 @@ import useInitialLoginCheck from "./hooks/user/useInitialLoginCheck";
 import MarginTopLayout from "./layouts/router/Layout";
 import ItemDetail from "./pages/Items/ItemDetailPage";
 import useAxiosPrivate from "./hooks/useAxiosPrivate";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // 페이지 진입시만 불러올 것
 const Missing = lazy(() => import("./pages/Error/MissingPage"));
@@ -23,6 +25,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Modal />
       <Navbar />
       <Suspense fallback={<LoadingSpinner css={centerPosition} size={46} />}>

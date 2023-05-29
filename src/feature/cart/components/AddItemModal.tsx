@@ -11,6 +11,7 @@ import { userInfoAtom } from "../../../context/recoil/atom/user";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { ItemType } from "../../items/types/itemDataTypes";
 import { isModalOpenAtom } from "../../../context/recoil/atom/globalModalAtom";
+import fireToast from "../../../lib/toastify/fireToast";
 
 interface NewItemFormValue {
   title: string;
@@ -50,10 +51,12 @@ const AddItemModal = () => {
         setOpenModal(false)
       },
       onError: () => {
+        fireToast('아이템 추가에 실패했습니다','error')
         queryClient.setQueryData(["SellingItems", userId], () => previousData);
         setOpenModal(true)
       },
       onSuccess: () => {
+        fireToast('상품이 추가됬습니다','success')
         queryClient.invalidateQueries({
           queryKey: ["Items"],
           refetchInactive: true,

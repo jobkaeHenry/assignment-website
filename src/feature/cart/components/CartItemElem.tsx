@@ -10,6 +10,7 @@ import { axiosPrivate } from "../../../lib/api/axios";
 import { deleteCartItem } from "../../../data/URL/server/cartRoute";
 import { userInfoAtom } from "../../../context/recoil/atom/user";
 import { useRecoilValue } from "recoil";
+import fireToast from "../../../lib/toastify/fireToast";
 
 type Props = {
   data: CartItemType;
@@ -33,7 +34,11 @@ const CartItemElem = ({ data }: Props) => {
       },
       onError: () => {
         queryClient.setQueryData(["Cartitems", userId], () => previousData);
+        fireToast('아이템 삭제에 실패했습니다', 'error')
       },
+      onSuccess:()=>{
+        fireToast('장바구니에서 제거되었습니다','success')
+      }
     }
   );
 
