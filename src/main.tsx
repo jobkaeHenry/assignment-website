@@ -11,7 +11,7 @@ export const queryClient = new QueryClient({
       retry: 0,
       useErrorBoundary: true,
       suspense: true,
-      staleTime:5*1000*60
+      staleTime: 5 * 1000 * 60,
     },
     mutations: {
       retry: 0,
@@ -21,11 +21,9 @@ export const queryClient = new QueryClient({
 });
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
-    </RecoilRoot>
-  </React.StrictMode>
+  <RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
+  </RecoilRoot>
 );
