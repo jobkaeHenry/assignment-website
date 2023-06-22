@@ -46,7 +46,7 @@ const DashBoard = () => {
 export default DashBoard;
 
 const DashBoardWarpper = styled.div`
-  width: 240px;
+  width: 260px;
   padding: 16px;
   height: calc(100vh - 76px);
   border-right: 1px solid var(--line-gray);

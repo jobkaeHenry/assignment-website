@@ -14,7 +14,7 @@ const MainCarousel = () => {
 export default MainCarousel;
 
 const CarouselWarpper = styled.img`
-  width: 100%;
+  width: 100vw;
   height: calc(90vh - 76px);
   display: flex;
   object-fit: cover;
