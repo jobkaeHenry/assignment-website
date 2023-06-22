@@ -5,7 +5,9 @@ import { LoadingSpinner } from "../../../../components/atom/lodaing/Spinner";
 import { Link } from "react-router-dom";
 import { itemDescription } from "../../../../data/URL/local/user/url";
 import { useAddToCart } from "./useAddToCart";
-
+import { useQueryClient } from "react-query";
+import axios from "../../../../lib/api/axios";
+import { getItemRoute } from "../../../../data/URL/server/ItemsRoute";
 
 type Props = {
   data: ItemType;
@@ -15,9 +17,15 @@ const ItemCard = ({ data }: Props) => {
   const { description, id, image, price, title } = data;
 
   const { isProceeding, addToCartHandler } = useAddToCart();
+  const queryClient = useQueryClient();
+  const preFetchQuery = (id:string) =>
+    queryClient.prefetchQuery(["ItemDetail", id], async () => {
+      const { data } = await axios.get(getItemRoute(id));
+      return data;
+    });
 
   return (
-    <CardWrapper>
+    <CardWrapper onMouseOver={()=>preFetchQuery(id)}>
       <ImageWrapper>
         <AddToCartBtn
           role="button"
