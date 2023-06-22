@@ -8,3 +8,5 @@ export const getItemRoute = (id: string) => `/items/${id}`;
 export const addToCartRoute = "/cart";
 
 export const deleteCartItem = (id: string) => `/cart/${id}`;
+
+export const changeQuantityRoute = (id: string) => `/cart/${id}/quantity`;
