@@ -1,9 +1,11 @@
-export const getLS = (key: string) => {
+export const getLS = <T,>(key: string) => {
   const item = localStorage.getItem(key);
   let returnValue;
   try {
-    if (item) returnValue = JSON.parse(item);
-    return returnValue;
+    if (item) {
+      returnValue = JSON.parse(item);
+      return returnValue as T;
+    }
   } catch (err) {
     return null;
   }
