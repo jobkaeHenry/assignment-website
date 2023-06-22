@@ -25,7 +25,7 @@ const SellingItemElem = ({ data }: Props) => {
     userId,
   ])[0][1] as ItemType[];
 
-  const { mutate } = useMutation(
+  const { mutate:deleteItem } = useMutation(
     (id: string) => axiosPrivate.delete(deleteItemRoute(id)),
     {
       onSuccess: () => {
@@ -60,10 +60,10 @@ const SellingItemElem = ({ data }: Props) => {
             {`[${title}]`}
           </Text>
           <Text typography="p">{description}</Text>
-          <Text typography="p">{price}</Text>
+          <Text typography="p">{price.toLocaleString()}</Text>
         </ColumnWrapper>
       </RowWrapper>
-      <DeleteButton onClick={() => mutate(id)}>삭제</DeleteButton>
+      <DeleteButton onClick={() => deleteItem(id)}>삭제</DeleteButton>
     </CartItemWrapper>
   );
 };
