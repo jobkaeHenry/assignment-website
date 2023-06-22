@@ -12,15 +12,17 @@ import useSetTitle from "../../../hooks/useSetTitle";
 
 const ItemDetail = () => {
   const { id } = useParams();
-  const { data } = useQuery<ItemType>(["ItemDetail", id], () => {
-    return axios.get(getItemRoute(id || "")).then(({ data }) => data);
+  const { data } = useQuery<ItemType>(["ItemDetail", id], async () => {
+    const { data } = await axios.get(getItemRoute(id || ""));
+
+    return data;
   });
   const { addToCartHandler } = useAddToCart();
-  useSetTitle(data!.title)
+  useSetTitle(data?.title ?? "상품 상세설명");
 
   return (
     <RowWrapper>
-      <ItemImage src={data?.image} alt={`${data?.title} 이미지`} />
+      <ItemImage width={400} height={600} src={data?.image} alt={`${data?.title} 이미지`} />
       <DescriptionWrapper>
         <ColumnWrapper>
           <Text typography="h2" bold>
@@ -34,11 +36,16 @@ const ItemDetail = () => {
 
         <ColumnWrapper>
           <TermWrapper>
-            Pengiriman Kirim ke: Dikirim dalam 24 jam, (Setelah pembayaran
-            dikonfirmasi)
+            
           </TermWrapper>
 
-          <Button onClick={() => addToCartHandler(data!.id)}>
+          <Button
+            onClick={() => {
+              if (data?.id) {
+                addToCartHandler(data.id);
+              }
+            }}
+          >
             장바구니에 추가
           </Button>
         </ColumnWrapper>

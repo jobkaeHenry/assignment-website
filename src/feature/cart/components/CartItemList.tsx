@@ -16,12 +16,13 @@ const CartItemList = () => {
     axiosPrivate.get(getCartItemById).then(({ data }) => data)
   );
   const totalPrice = useMemo(() => {
-    return data!.reduce((acc, cur) => {
-      return cur.itemInfo.price + acc;
+    return (data??[]).reduce((acc, cur) => {
+      return cur.itemInfo.price*cur.quantity + acc;
     }, 0);
   }, [data]);
+
   const totalQuantity = useMemo(() => {
-    return data!.reduce((acc, cur) => {
+    return (data??[]).reduce((acc, cur) => {
       return cur.quantity + acc;
     }, 0);
   }, [data]);
@@ -30,8 +31,8 @@ const CartItemList = () => {
     <>
       <ItemListWrapper>
       <Text typography="h3" bold>장바구니</Text>
-        {data!.length !== 0 ? (
-          data!.map((cartItem, i) => (
+        {(data??[]).length !== 0 ? (
+          (data??[]).map((cartItem, i) => (
             <CartItemElem data={cartItem} key={cartItem.itemInfo._id + i} />
           ))
         ) : (

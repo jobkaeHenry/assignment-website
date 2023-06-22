@@ -34,8 +34,8 @@ const SellingItemList = () => {
           아이템추가
         </Button>
       </TitleWrapper>
-      {data!.length !== 0 ? (
-        data!.map((sellingItem, i) => (
+      {(data??[]).length !== 0 ? (
+        (data??[]).map((sellingItem, i) => (
           <SellingItemElem data={sellingItem} key={sellingItem.id + i} />
         ))
       ) : (
