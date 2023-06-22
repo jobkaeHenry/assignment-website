@@ -2,21 +2,39 @@ import styled from "@emotion/styled";
 
 import MobileWrapper from "../layouts/MobileWrapper";
 import Text from "./atom/Text";
+import { ColumnWrapper } from "../layouts/Wrapper";
 
 const Footer = () => {
   return (
     <FooterWrapper>
       <MobileWrapper>
         <SpaceBetweenWrapper>
-          <Text typography="h4" bold color="var(--pure-white)">Contact us</Text>
-          <Text typography="h4" bold color="var(--pure-white)">Payment Method</Text>
-          <Text typography="h4" bold color="var(--pure-white)">Term of Service</Text>
+          <ColumnWrapper>
+            <Text typography="h4" bold color="var(--pure-white)">
+              Contact us
+            </Text>
+            <Text typography="p" bold color="var(--pure-white)">
+              1zzangjun@gmail.com
+            </Text>
+          </ColumnWrapper>
+          <ColumnWrapper>
+            <Text typography="h4" bold color="var(--pure-white)">
+              Payment Method
+            </Text>
+            <Text typography="p" bold color="var(--pure-white)">
+              Cash Only
+            </Text>
+          </ColumnWrapper>
+          <ColumnWrapper>
+            <Text typography="h4" bold color="var(--pure-white)">
+              Term of services
+            </Text>
+            <Text typography="p" bold color="var(--pure-white)">
+              Feel free to use
+            </Text>
+          </ColumnWrapper>
         </SpaceBetweenWrapper>
       </MobileWrapper>
-      <MadeWith
-        src="https://shop-static.plugo.world/img/made_with_plugo.0803995.png"
-        alt="logo"
-      />
     </FooterWrapper>
   );
 };
@@ -26,7 +44,7 @@ export default Footer;
 const FooterWrapper = styled.footer`
   position: relative;
   width: 100%;
-  min-height: 240px;
+  min-height: 200px;
   margin-top: 36px;
   padding: 36px;
   background-color: var(--bg-main);
@@ -39,11 +57,4 @@ const SpaceBetweenWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   gap: 24px;
-`;
-
-const MadeWith = styled.img`
-  position: absolute;
-  bottom: 24px;
-  left: 24px;
-  height: 48px;
 `;

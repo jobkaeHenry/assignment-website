@@ -9,11 +9,9 @@ export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 0,
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
       useErrorBoundary: true,
       suspense: true,
-      
+      staleTime:5*1000*60
     },
     mutations: {
       retry: 0,

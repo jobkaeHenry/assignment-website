@@ -22,8 +22,8 @@ p {
   color: var(--font-black);
 }
 :root {
-  --main: #eab64d;
-  --sub-color: #155088;
+  --main: #b61a84;
+  --sub-color: #00a5ba;
 
   --alert-green: #31a215;
   --alert-amber: #ef8523;
@@ -36,7 +36,7 @@ p {
 
   --bg-gray: #d8dede;
   --bg-light: #e9f3f3;
-  --bg-main:rgb(185, 153, 134);
+  --bg-main: #c9a2bc;
 
   --pure-white: #ffffff;
   --line-black: #777777;
