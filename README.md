@@ -1,6 +1,6 @@
 # Plugo-assignment-website
 ## 🔗 배포링크
-http://plugo-assignment.s3-website.ap-northeast-2.amazonaws.com/ </br>
+http://jobkae-ecommerce.s3-website.ap-northeast-2.amazonaws.com </br>
 Github Action으로 CI/CD 를 구축하여 AWS S3버킷에 업로드된 정적 웹사이트입니다.
 ![image](https://github.com/jobkaeHenry/assignment-website/assets/100949102/45505cb0-bf44-4934-b7f3-6e2d3c72962e)
 
@@ -59,7 +59,8 @@ https://github.com/jobkaeHenry/assignment-server
 ![image](https://github.com/jobkaeHenry/assignment-website/assets/100949102/b2eefa7b-da00-4ea2-ae39-34c611b8bcab)
 
 ## 아키텍쳐
-![image](https://github.com/jobkaeHenry/assignment-website/assets/100949102/df36a36f-a7b1-48f6-92f0-d89ef4527d38)
+![image](https://github.com/jobkaeHenry/assignment-website/assets/100949102/59890d3c-f480-456d-9e62-bf0676beabb5)
+
 
 ## 추가해야 하는 기능
-infinite query / toast alarm☆☆☆ / 간단 통계
+infinite query / 간단 통계
