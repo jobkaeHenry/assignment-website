@@ -1,4 +1,4 @@
-# Plugo-assignment-website
+# JobkaeHenry Ecommerce
 ## 🔗 배포링크
 http://jobkae-ecommerce.s3-website.ap-northeast-2.amazonaws.com </br>
 Github Action으로 CI/CD 를 구축하여 AWS S3버킷에 업로드된 정적 웹사이트입니다.
