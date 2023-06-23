@@ -2,7 +2,8 @@
 ## 🔗 배포링크
 http://jobkae-ecommerce.s3-website.ap-northeast-2.amazonaws.com </br>
 Github Action으로 CI/CD 를 구축하여 AWS S3버킷에 업로드된 정적 웹사이트입니다.
-![image](https://github.com/jobkaeHenry/assignment-website/assets/100949102/45505cb0-bf44-4934-b7f3-6e2d3c72962e)
+![screencapture-jobkae-ecommerce-s3-website-ap-northeast-2-amazonaws-2023-06-23-17_21_17](https://github.com/jobkaeHenry/assignment-website/assets/100949102/260bc658-12f9-4ff4-85b3-f2056479eee0)
+
 
 ## 🔗 서버 Repository
 https://github.com/jobkaeHenry/assignment-server
