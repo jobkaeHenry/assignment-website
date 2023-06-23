@@ -15,15 +15,15 @@ const FileInput = React.forwardRef(
     const [fileTitle, setFileTitle] = useState<string | undefined>();
 
     const saveImgFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.files) {
+      if (e.target.files && e.target.files[0]) {
         const file = e.target.files[0];
         const reader = new FileReader();
-        setFileTitle(file.name);
+        setFileTitle(file.name.split('.')[0].slice(0,15)+"..."+file.name.split('.')[1]);
         reader.readAsDataURL(file);
         reader.onloadend = () => {
           setHasfile(reader.result);
         };
-      }
+      }else setHasfile(null)
     };
 
     return (
