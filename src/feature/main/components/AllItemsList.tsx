@@ -1,16 +1,11 @@
 import PaddingLayout from "../../../layouts/PaddingLayout";
-import axios from "axios";
-import { getAllItemsRoute } from "../../../data/URL/server/ItemsRoute";
-import { useQuery } from "react-query";
-import { ItemType } from "../../items/types/itemDataTypes";
 import ItemCard from "./Items/ItemCard";
 import { NotifyMessage } from "../../../components/atom/lodaing/Error";
 import { css } from "@emotion/react";
+import { useGetAllItemsQuery } from "../api/useAllItemsQuery";
 
 const AllItemsList = () => {
-  const { data } = useQuery<ItemType[]>(["AllItems"], () =>
-    axios.get(getAllItemsRoute).then(({ data }) => data)
-  );
+  const { data } = useGetAllItemsQuery();
 
   return (
     <PaddingLayout css={FlexWrap}>

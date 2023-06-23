@@ -5,18 +5,14 @@ import { itemDescription } from "../../../data/URL/local/user/url";
 import { ColumnWrapper, RowWrapper } from "../../../layouts/Wrapper";
 import Text from "../../../components/atom/Text";
 import InputWithLabel from "./../../../components/atom/form/InputWithLabel";
-import { useMutation, useQueryClient } from "react-query";
-import { axiosPrivate } from "../../../lib/api/axios";
-import {
-  changeQuantityRoute,
-  deleteCartItem,
-} from "../../../data/URL/server/cartRoute";
 import { userInfoAtom } from "../../../context/recoil/atom/user";
 import { useRecoilValue } from "recoil";
-import fireToast from "../../../lib/toastify/fireToast";
-import { AxiosError } from "axios";
 import useDebounce from "../../../hooks/useDebounce";
 import { useEffect, useState } from "react";
+import {
+  useDeleteCartItemQuery,
+  usePutCartItemQuantity,
+} from "../api/useCartItemsQuery";
 
 type Props = {
   data: CartItemType;
@@ -24,76 +20,17 @@ type Props = {
 
 const CartItemElem = ({ data }: Props) => {
   const { description, _id, image, price, title } = data.itemInfo;
-  const queryClient = useQueryClient();
+
   const { userId } = useRecoilValue(userInfoAtom);
   const [currentQuantity, setCurrentQuantity] = useState(data.quantity);
   const debouncedQuantity = useDebounce(currentQuantity, 300);
-  const { mutate: changeQuantity } = useMutation(
-    ({ id, quantity }: { id: string; quantity: number }) =>
-      axiosPrivate.put(changeQuantityRoute(id), { quantity }),
-    {
-      onMutate: ({ id, quantity }) => {
-        queryClient.cancelQueries(["Cartitems", userId]);
-        const querySnapshot = queryClient.getQueryData(["Cartitems", userId]);
-        // let copyedArr: CartItemType[];
-        // if (Array.isArray(querySnapshot)) {
-        //   copyedArr = JSON.parse(JSON.stringify(querySnapshot));
-        // }
-        queryClient.setQueryData<CartItemType[]>(
-          ["Cartitems", userId],
-          (prev) => {
-            const index = (prev ?? []).findIndex((e) => e.itemInfo._id === id);
-            (prev ?? [])[index] = { ...(prev ?? [])[index], quantity };
-            return prev ?? [];
-          }
-        );
-        return { querySnapshot };
-      },
-      onError: (_err: AxiosError, _queryFnParams, context) => {
-        queryClient.setQueryData(["Cartitems", userId], context?.querySnapshot);
-        if (
-          _err.response?.status &&
-          _err.response?.status >= 400 &&
-          _err.response?.status < 500
-        ) {
-          fireToast("올바르지 않은 값입니다", "error");
-        } else fireToast("알 수 없는 오류가 발생했습니다", "error");
-      },
-      onSettled: () => {
-        queryClient.invalidateQueries(["Cartitems", userId]);
-      },
-    }
-  );
+
+  const { mutate: changeQuantity } = usePutCartItemQuantity(userId);
   useEffect(() => {
     changeQuantity({ id: _id, quantity: Number(debouncedQuantity) });
   }, [_id, changeQuantity, debouncedQuantity]);
 
-  const { mutate: removeItem } = useMutation(
-    (id: string) => axiosPrivate.delete(deleteCartItem(id)),
-    {
-      onMutate: () => {
-        queryClient.cancelQueries(["Cartitems", userId]);
-        const querySnapshot = queryClient.getQueryData(["Cartitems", userId]);
-        queryClient.setQueryData<CartItemType[]>(
-          ["Cartitems", userId],
-          (prev) => {
-            return (prev ?? []).filter((e) => e.itemInfo._id !== _id);
-          }
-        );
-        return { querySnapshot };
-      },
-      onError: (_err, _queryFnParams, context) => {
-        queryClient.setQueryData(["Cartitems", userId], context?.querySnapshot);
-        fireToast("아이템 삭제에 실패했습니다", "error");
-      },
-      onSuccess: () => {
-        fireToast("장바구니에서 제거되었습니다", "success");
-      },
-      onSettled: () => {
-        queryClient.invalidateQueries(["Cartitems", userId]);
-      },
-    }
-  );
+  const { mutate: removeItem } = useDeleteCartItemQuery(userId);
 
   return (
     <CartItemWrapper>
@@ -105,7 +42,9 @@ const CartItemElem = ({ data }: Props) => {
           <Text typography="h3" bold className="text-overflow-hidden">
             {`[${title}]`}
           </Text>
-          <Text typography="p" className="text-overflow-hidden">{description}</Text>
+          <Text typography="p" className="text-overflow-hidden">
+            {description}
+          </Text>
           <Text typography="p">{price.toLocaleString()}</Text>
         </ColumnWrapper>
       </RowWrapper>

@@ -4,17 +4,13 @@ import TextArea from "../../../components/atom/form/TextArea";
 import Text from "../../../components/atom/Text";
 import { useForm } from "react-hook-form";
 import { Button } from "./../../../components/atom/form/Button";
-import { axiosPrivate } from "../../../lib/api/axios";
-import { createItemUrlRoute } from "../../../data/URL/server/ItemsRoute";
-import { useMutation, useQueryClient } from "react-query";
 import { userInfoAtom } from "../../../context/recoil/atom/user";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isModalOpenAtom } from "../../../context/recoil/atom/globalModalAtom";
-import fireToast from "../../../lib/toastify/fireToast";
+import { useRecoilValue } from "recoil";
 import { getLS, setLS } from "./../../../utils/localStorage";
 import { useEffect, useState } from "react";
 import FileInput from "../../../components/atom/form/FileInput";
 import { ColumnWrapper } from "../../../layouts/Wrapper";
+import { usePostSellingItemQuery } from "../api/useSellingItemsQuery";
 
 interface NewItemFormValue {
   title: string;
@@ -32,9 +28,6 @@ const AddItemModal = () => {
     formState: { errors },
   } = useForm<NewItemFormValue>();
 
-  const queryClient = useQueryClient();
-
-  const setOpenModal = useSetRecoilState(isModalOpenAtom);
   const { userId } = useRecoilValue(userInfoAtom);
 
   const [savedAddingItem, _] = useState(
@@ -43,6 +36,7 @@ const AddItemModal = () => {
   useEffect(() => {
     const handleChange = () => {
       const formValue = watch(); // 현재 값 가져오기
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { image, ...rest } = formValue;
       setLS("savedAddingItem", rest); // 로컬 스토리지에 저장하기
     };
@@ -50,36 +44,7 @@ const AddItemModal = () => {
     watch(handleChange); // 값이 변할 때마다 handleChange 함수 실행
   }, [watch]);
 
-  const { mutate: submitFunction } = useMutation(
-    (data: FormData) => {
-      return axiosPrivate.post(createItemUrlRoute, data, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-    },
-    {
-      onError: () => {
-        fireToast("아이템 추가에 실패했습니다", "error");
-        setOpenModal(true);
-      },
-      onSuccess: () => {
-        fireToast("상품이 추가됬습니다", "success");
-        queryClient.invalidateQueries({
-          queryKey: ["Items"],
-          refetchInactive: true,
-        });
-        queryClient.invalidateQueries({
-          queryKey: ["AllItems"],
-          refetchInactive: true,
-        });
-        queryClient.invalidateQueries({
-          queryKey: ["SellingItems", userId],
-          refetchInactive: true,
-        });
-        setOpenModal(false);
-        setLS("savedAddingItem", null);
-      },
-    }
-  );
+  const { mutate: submitFunction } = usePostSellingItemQuery(userId);
 
   return (
     <FormWrapper

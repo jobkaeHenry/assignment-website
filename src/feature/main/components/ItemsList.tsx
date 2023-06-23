@@ -1,21 +1,16 @@
-import { useQuery } from "react-query";
-import axios from "../../../lib/api/axios";
-import { getItemsByPageNum } from "../../../data/URL/server/ItemsRoute";
-import { ItemType } from "../../items/types/itemDataTypes";
 import ItemCard from "./Items/ItemCard";
 import PaddingLayout from "../../../layouts/PaddingLayout";
 
 import { NotifyMessage } from "../../../components/atom/lodaing/Error";
 import { css } from "@emotion/react";
+import { useGetItemsByPageNumQuery } from "../api/useItemsQuery";
 
 interface Props {
   pageNum?: number;
 }
 
 const ItemsList = ({ pageNum = 1 }: Props) => {
-  const { data } = useQuery<ItemType[]>(["Items", pageNum], () =>
-    axios.get(getItemsByPageNum(pageNum)).then(({ data }) => data)
-  );
+  const { data } = useGetItemsByPageNumQuery(pageNum);
 
   return (
     <PaddingLayout flexDirection="row" css={overFlowX}>
@@ -30,6 +25,6 @@ const ItemsList = ({ pageNum = 1 }: Props) => {
 
 const overFlowX = css`
   overflow-y: auto;
-`
+`;
 
 export default ItemsList;

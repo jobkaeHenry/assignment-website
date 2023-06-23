@@ -1,38 +1,31 @@
-import { useQuery } from "react-query";
-import { getCartItemById } from "../../../data/URL/server/cartRoute";
 import CartItemElem from "./CartItemElem";
 import { NotifyMessage } from "../../../components/atom/lodaing/Error";
-import { CartItemType } from "../types/cartItemsType";
-import { axiosPrivate } from "../../../lib/api/axios";
 import { useRecoilValue } from "recoil";
 import { userInfoAtom } from "../../../context/recoil/atom/user";
 import styled from "@emotion/styled";
-import { useMemo } from "react";
 import Text from "../../../components/atom/Text";
+import { useGetCartItemsByIdQuery } from "../api/useCartItemsQuery";
 
 const CartItemList = () => {
   const { userId } = useRecoilValue(userInfoAtom);
-  const { data } = useQuery<CartItemType[]>(["Cartitems", userId], () =>
-    axiosPrivate.get(getCartItemById).then(({ data }) => data)
-  );
-  const totalPrice = useMemo(() => {
-    return (data??[]).reduce((acc, cur) => {
-      return cur.itemInfo.price*cur.quantity + acc;
-    }, 0);
-  }, [data]);
+  const { data } = useGetCartItemsByIdQuery(userId);
 
-  const totalQuantity = useMemo(() => {
-    return (data??[]).reduce((acc, cur) => {
-      return cur.quantity + acc;
-    }, 0);
-  }, [data]);
+  const totalPrice = (data ?? []).reduce((acc, cur) => {
+    return cur.itemInfo.price * cur.quantity + acc;
+  }, 0);
+
+  const totalQuantity = (data ?? []).reduce((acc, cur) => {
+    return cur.quantity + acc;
+  }, 0);
 
   return (
     <>
       <ItemListWrapper>
-      <Text typography="h3" bold>장바구니</Text>
-        {(data??[]).length !== 0 ? (
-          (data??[]).map((cartItem, i) => (
+        <Text typography="h3" bold>
+          장바구니
+        </Text>
+        {(data ?? []).length !== 0 ? (
+          (data ?? []).map((cartItem, i) => (
             <CartItemElem data={cartItem} key={cartItem.itemInfo._id + i} />
           ))
         ) : (
