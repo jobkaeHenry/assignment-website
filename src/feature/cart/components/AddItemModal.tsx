@@ -31,25 +31,30 @@ const AddItemModal = () => {
     getValues,
     formState: { errors },
   } = useForm<NewItemFormValue>();
+
   const queryClient = useQueryClient();
-  const { userId } = useRecoilValue(userInfoAtom);
+
   const setOpenModal = useSetRecoilState(isModalOpenAtom);
+  const { userId } = useRecoilValue(userInfoAtom);
+
   const [savedAddingItem, _] = useState(
     getLS<NewItemFormValue>("savedAddingItem") || undefined
   );
   useEffect(() => {
     const handleChange = () => {
-      const formValue = watch(["price", "description", "title"]); // 현재 값 가져오기
-      setLS("savedAddingItem", formValue); // 로컬 스토리지에 저장하기
+      const formValue = watch(); // 현재 값 가져오기
+      const { image, ...rest } = formValue;
+      setLS("savedAddingItem", rest); // 로컬 스토리지에 저장하기
     };
 
     watch(handleChange); // 값이 변할 때마다 handleChange 함수 실행
   }, [watch]);
 
   const { mutate: submitFunction } = useMutation(
-    (data:FormData) => {
-
-      return axiosPrivate.post(createItemUrlRoute, data,{headers:{"Content-Type":'multipart/form-data'}});
+    (data: FormData) => {
+      return axiosPrivate.post(createItemUrlRoute, data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
     },
     {
       onError: () => {
@@ -87,14 +92,13 @@ const AddItemModal = () => {
             formData.append(key, value);
           }
         });
-        console.log(formData)
+        console.log(formData);
         submitFunction(formData);
       })}
     >
       <FileInput
         label="이미지를 추가해주세요"
         placeholder="상품명을 입력해주세요"
-        defaultValue={savedAddingItem?.title}
         {...register("image", {
           required: true,
           validate: (value) => {
@@ -105,8 +109,8 @@ const AddItemModal = () => {
             if (!file.type.includes("image")) {
               return "이미지 파일만 허용됩니다.";
             }
-            if (file.size > 5 * 1024 * 1024) {
-              return "파일 크기는 10MB 이하로 제한됩니다.";
+            if (file.size > 3 * 1024 * 1024) {
+              return "파일 크기는 3MB 이하로 제한됩니다.";
             }
             return true;
           },
