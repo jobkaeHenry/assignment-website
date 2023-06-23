@@ -1,12 +1,14 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import styled from "@emotion/styled";
+import banner1 from '../../../assets/banner-1.png'
+import banner2 from '../../../assets/banner-2.png'
 
 const MainCarousel = () => {
   return (
     <Carousel autoPlay infiniteLoop showThumbs={false} showArrows={false} showStatus={false}>
-      <CarouselWarpper src="https://d2kchovjbwl1tk.cloudfront.net/vendors/19/assets/image/1685114333408-GG_Banner_Website.jpg" />
-      <CarouselWarpper src="https://d2kchovjbwl1tk.cloudfront.net/vendors/19/assets/image/1684890670432-GG_Banner_Website_8.jpg" />
+      <CarouselWarpper src={banner2} />
+      <CarouselWarpper src={banner1} />
     </Carousel>
   );
 };

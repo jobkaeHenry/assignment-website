@@ -56,10 +56,10 @@ const SellingItemElem = ({ data }: Props) => {
           <ImageWrapper src={image}></ImageWrapper>
         </Link>
         <ColumnWrapper>
-          <Text typography="h3" bold>
+          <Text typography="h3" bold className="text-overflow-hidden">
             {`[${title}]`}
           </Text>
-          <Text typography="p">{description}</Text>
+          <Text typography="p" className="text-overflow-hidden">{description}</Text>
           <Text typography="p">{price.toLocaleString()}</Text>
         </ColumnWrapper>
       </RowWrapper>

@@ -37,7 +37,7 @@ const ItemCard = ({ data }: Props) => {
           {isProceeding ? <LoadingSpinner size={24} /> : "+"}
         </AddToCartBtn>
         <Link to={itemDescription(id)}>
-          <img src={image} alt={title} />
+          <img src={image} alt={`${title} 사진`} />
         </Link>
       </ImageWrapper>
       <Text typography={"h4"} weight="var(--medium)">
@@ -46,7 +46,7 @@ const ItemCard = ({ data }: Props) => {
       <Text typography={"h4"} color="var(--font-gray)">
         {price.toLocaleString() + "원"}
       </Text>
-      <Text typography={"sub"} weight="var(--medium)">
+      <Text typography={"sub"} weight="var(--medium)" className="text-overflow-hidden">
         {description}
       </Text>
     </CardWrapper>
