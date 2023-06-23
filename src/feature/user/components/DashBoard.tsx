@@ -10,12 +10,17 @@ import { upgradeRoute } from "../../../data/URL/server/userRoute";
 const DashBoard = () => {
   const { isSeller, userName, isSellerNow } = useRecoilValue(userInfoAtom);
   const setUserInfo = useSetRecoilState(userInfoAtom);
-
+  /**
+   * 유저의 Seller권한을 True로 상승을 요청하는 함수
+   */
   const upgradeRole = async () => {
     return axiosPrivate.post(upgradeRoute).then(() => {
       setUserInfo((prev) => ({ ...prev, isSeller: true }));
     });
   };
+    /**
+   * 유저의 권한을 전환하는 함수
+   */
   const switchRole = () => {
     if (isSeller) {
       setUserInfo((prev) => ({ ...prev, isSellerNow: !prev.isSellerNow }));

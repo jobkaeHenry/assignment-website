@@ -17,13 +17,9 @@ export default MainCarousel;
 
 const CarouselWarpper = styled.img`
   width: 100vw;
-  height: calc(90vh - 76px);
+  height: calc(70vh - 76px);
   display: flex;
   object-fit: cover;
   align-items: center;
   justify-content: center;
-  /* 모바일에서 드래그시 Swipe로 인해 화면이동이 안되는 이슈로 인해 모바일에선 사이즈를 줄임  */
-  @media screen and (max-width: 768px) {
-    height: calc(70vh - 76px);
-  }
 `;

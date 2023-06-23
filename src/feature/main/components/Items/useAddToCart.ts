@@ -13,7 +13,7 @@ export const useAddToCart = () => {
 
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation(
+  const { mutate:addToCartHandler } = useMutation(
     (id: string) => axiosPrivate.post(addToCartRoute, { itemId: id }),
     {
       onMutate: () => {
@@ -36,5 +36,5 @@ export const useAddToCart = () => {
       
     }
   );
-  return { addToCartHandler: mutate, isProceeding };
+  return { addToCartHandler, isProceeding };
 };
