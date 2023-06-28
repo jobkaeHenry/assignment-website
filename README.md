@@ -6,7 +6,7 @@ Github Action으로 CI/CD 를 구축하여 AWS S3버킷에 업로드된 정적 �
 
 
 ## 🔗 서버 Repository
-https://github.com/jobkaeHenry/assignment-server
+https://github.com/jobkaeHenry/ecommerce-server
 </br>
 
 ##  커맨드
